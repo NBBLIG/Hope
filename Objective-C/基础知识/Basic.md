@@ -20,7 +20,7 @@
 + @public 共有的，该实例变量谁都可以访问
 
 ### 知识点 5、id 与 instancetype 区别
-```
+```objective-c
 @implementation Teacher
 //id 运行时检查，id 可作为方法参数
 + (id)teacher {

@@ -7,7 +7,7 @@
 	- #include 赋值黏贴
 	- #import “” 本质与 #include 一样，只不过用 #ifdef #define 避免了重复引用的问题
 	- #import <> 导入系统框架
-	- @import Modules 模块导入，可以参考这个![链接](https://blog.csdn.net/huangfei711/article/details/76340383)
+	- @import Modules 模块导入，可以参考这个[链接](https://blog.csdn.net/huangfei711/article/details/76340383)
 	- @class 只需要知道引用类的名称即可，不需要知道内部的实现变量和方法。@class还可以解决循环依赖的问题，A.h导入了B.h，而B.h导入了A.h，每一个头文件的编译都要让对象先编译成功才行。
 + 知识点 3、Category 是什么？类扩展是什么？扩展一个类的方式用继承好还是 category 好？为什么？
 	- category 类别，特性是不用定义子类就能扩展一个类的功能，还能将不同的功能分开，不会影响其他类和原有类的关系。

@@ -38,10 +38,12 @@
 
 name=`git config --get user.name`
 email=`git config --get user.email`
-echo "Author:$name"
-echo "Email:$email"
 commitMsg="$1"
 aa=`cat "$commitMsg"`
+
+echo "Author:$name"
+echo "Email:$email"
+echo "Commit-msg:$aa"
 result=""
 userMailPat="bai*"
 function checkP {
@@ -62,7 +64,7 @@ function checkName {
 }
 
 function checkMessage {
-	checkP $userMailPat $commitMsg
+	checkP $userMailPat $aa
 	return $?
 }
 

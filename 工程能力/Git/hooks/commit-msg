@@ -61,6 +61,11 @@ function checkName {
 	return $?
 }
 
+function checkMessage {
+	checkP $userMailPat $commitMsg
+	return $?
+}
+
 checkEmail
 if [ -n "$result" ]; then
 	echo "邮箱 $result 包含敏感信息"
@@ -74,9 +79,16 @@ if [ -n "$result" ]; then
 	echo "名称 $result 包含敏感信息"
 	exit 1
 else
-	echo "All Pass"
+	echo "Name Pass"
 fi
 
+checkMessage
+if [ -n "$result" ]; then
+	echo "提交信息 $result 中包含敏感信息"
+	exit 1
+else
+	echo "All Pass"
+fi
 
 
 test "" = "$(grep '^Signed-off-by: ' "$1" |

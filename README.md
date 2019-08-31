@@ -5,14 +5,20 @@
 Gitbook在线地址：https://nbblig.github.io/Hope/
 
 ### 第一步：安装 yarn
-```shell script
+```sh
 brew install node yarn
 ```
+
 ### 第二步：安装 git hook
-```shell script
+```sh
 yarn run githook-install
 ```
-### 第三步（可选）：安装开发依赖
-```shell script
+### 第三步：安装开发依赖
+```sh
 yarn
+```
+
+### 第四步：本地预览
+```sh
+yarn run preview
 ```

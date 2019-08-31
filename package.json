@@ -2,7 +2,10 @@
   "name": "hope",
   "version": "0.0.1",
   "description": "我们一起用汗水来打拼公司的未来！All in study for our company！",
-  "main": "index.js",
+  "main": "app/main.js",
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "scripts": {
     "githook-install": "sh scripts/githook.sh",
     "install-cloudkit-js": "curl https://cdn.apple-cloudkit.com/ck/2/cloudkit.js > app/cloudkit.js",

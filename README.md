@@ -10,7 +10,7 @@ brew install node yarn
 ```
 ###第二部：安装 git hook
 ```shell script
-yarn run githook_install
+yarn run githook-install
 ```
 ###第三步（可选）：安装开发依赖
 ```shell script

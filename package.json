@@ -4,7 +4,11 @@
   "description": "我们一起用汗水来打拼公司的未来！All in study for our company！",
   "main": "index.js",
   "scripts": {
-    "githook_install": "sh scripts/gitbook.sh"
+    "githook-install": "sh scripts/githook.sh",
+    "install-cloudkit-js": "curl https://cdn.apple-cloudkit.com/ck/2/cloudkit.js > app/cloudkit.js",
+    "postinstall": "yarn run install-cloudkit-js",
+    "deploy": "node app/main.js",
+    "deliver": "node app/deliver.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +24,10 @@
   },
   "homepage": "https://github.com/NBBLIG/Hope#readme",
   "devDependencies": {
-    "gitbook-cli": "^2.3.2"
+    "gitbook-cli": "^2.3.2",
+    "node-fetch": "^2.6.0"
+  },
+  "dependencies": {
+    "shelljs": "^0.8.3"
   }
 }

@@ -187,3 +187,5 @@ _book
 *.epub
 *.mobi
 *.pdf
+
+.idea

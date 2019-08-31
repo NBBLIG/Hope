@@ -1,0 +1,25 @@
+{
+  "name": "hope",
+  "version": "0.0.1",
+  "description": "我们一起用汗水来打拼公司的未来！All in study for our company！",
+  "main": "index.js",
+  "scripts": {
+    "githook_install": "sh scripts/gitbook.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NBBLIG/Hope.git"
+  },
+  "keywords": [
+    "iOS"
+  ],
+  "author": "daubert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NBBLIG/Hope/issues"
+  },
+  "homepage": "https://github.com/NBBLIG/Hope#readme",
+  "devDependencies": {
+    "gitbook-cli": "^2.3.2"
+  }
+}

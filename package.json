@@ -4,10 +4,10 @@
   "description": "我们一起用汗水来打拼公司的未来！All in study for our company！",
   "main": "app/main.js",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=11.0.0"
   },
   "scripts": {
-    "githook-install": "sh scripts/githook.sh",
+    "githook-install": "cp -R scripts/hooks/* .git/hooks",
     "install-cloudkit-js": "curl https://cdn.apple-cloudkit.com/ck/2/cloudkit.js > app/cloudkit.js",
     "postinstall": "yarn run install-cloudkit-js",
     "deploy": "node app/main.js",

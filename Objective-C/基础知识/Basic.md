@@ -11,6 +11,7 @@
 + `#import <>` 导入系统框架
 + `@import Modules` 模块导入，可以参考这个[链接](https://blog.csdn.net/huangfei711/article/details/76340383)
 + `@class` 只需要知道引用类的名称即可，不需要知道内部的实现变量和方法。@class还可以解决循环依赖的问题，A.h导入了B.h，而B.h导入了A.h，每一个头文件的编译都要让对象先编译成功才行。
+
 ---
 
 ### 知识点 3、Category 是什么？类扩展是什么？扩展一个类的方式用继承好还是 category 好？为什么？

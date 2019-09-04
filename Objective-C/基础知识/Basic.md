@@ -61,3 +61,10 @@
 ```
 @property = ivar + getter + setter
 ```
+
+---
+## 知识点 8、oc各种锁
+![avatar](./lock-compare.png)
+
++ [链接](https://www.jianshu.com/p/d69495dac8cb)详细描述了自旋锁和互斥锁，以及优缺点
++ pthread_mutex(recursive)、NSRecursiveLock、@synchronized都是递归锁。 [链接](https://www.jianshu.com/p/777c28eface5)

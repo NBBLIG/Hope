@@ -8,7 +8,7 @@ BST(二叉查找树)有如下特性：
 
 ##数据结构
 ``` swift
-class TreeNode {
+class TreeNode : NSObject {
     var value : Int
     var leftNode : TreeNode?
     var rightNode : TreeNode?
@@ -71,3 +71,93 @@ func createBST(nodes : [Int]) -> TreeNode? {
     }
 ```
 > 创建算法的时间复杂度为O（n * lg n）
+
+##查找节点
+``` swift
+func searchNode(root : TreeNode? , key : Int) -> TreeNode? {
+        
+        var currentNode = root
+        
+        while currentNode != nil && key != currentNode?.value {
+            let tempNode = currentNode!
+            if tempNode.value > key {
+                currentNode = tempNode.leftNode
+            }
+            else {
+                currentNode = tempNode.rightNode
+            }
+        }
+        
+        return currentNode
+    }
+```
+> 时间复杂度O(lg n)
+
+##最小值
+``` swift
+func MIN(root : TreeNode?) -> TreeNode? {
+        var currentNode = root
+        
+        while currentNode != nil && currentNode?.leftNode != nil {
+            currentNode = currentNode!.leftNode
+        }
+        return currentNode
+    }
+```
+##最大值
+``` swift
+func MAX(root : TreeNode?) -> TreeNode? {
+        var currentNode = root
+        
+        while currentNode != nil && currentNode?.rightNode != nil {
+            currentNode = currentNode!.rightNode
+        }
+        return currentNode
+    }
+```
+##节点的后继节点
+> 某个节点的后继指的是：在中序遍历里面，排在该节点后面的节点
+
+``` swift
+func successor(root : TreeNode?, value : Int) -> TreeNode? {
+        //先通过查找算法找出是否存在该节点
+        let node = searchNode(root: root, key: value)
+        guard var tempNode = node else {
+            return nil
+        }
+        //若该节点存在右子树，则求右子树的最小值
+        if let rightNode = tempNode.rightNode {
+            return MIN(root: rightNode)
+        }
+        else {
+            var parentNode = tempNode.parentNode
+            //求祖先节点中存在子节点不是父节点的右孩子的情况，具体原因是：该节点没有右子树，那他肯定是某棵子树的值最大节点，那找到这课子树的根节点的父节点就是他的后继
+            while parentNode != nil , let pRightNode = parentNode?.rightNode, pRightNode == tempNode {
+                tempNode = parentNode!
+                parentNode = tempNode.parentNode
+            }
+            return parentNode
+        }
+    }
+```
+##节点的前驱(跟后继同理)
+``` swift
+func predecessor(root : TreeNode?, value : Int) -> TreeNode? {
+        let node = searchNode(root: root, key: value)
+        guard var tempNode = node else {
+            return nil
+        }
+        
+        if let leftNode = tempNode.leftNode {
+            return MAX(root: leftNode)
+        }
+        else {
+            var parentNode = tempNode.parentNode
+            while parentNode != nil , let pLeftNode = parentNode?.leftNode, pLeftNode == tempNode {
+                tempNode = parentNode!
+                parentNode = tempNode.parentNode
+            }
+            return parentNode
+        }
+    }
+```

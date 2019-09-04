@@ -9,7 +9,8 @@
 + `#include` 赋值粘贴
 + `#import “”` 本质与 `#include` 一样，只不过用 `#ifdef #define` 避免了重复引用的问题
 + `#import <>` 导入系统框架
-+ `@import Modules` 模块导入，可以参考这个[链接](https://blog.csdn.net/huangfei711/article/details/76340383)
++ `@import Modules` 模块导入，可以参考这个[链接](https://blog.csdn.net/huangfei711/article/details/76340383) 
+这个[链接](https://blog.csdn.net/zcmuczx/article/details/78308631)讲@import更详细
 + `@class` 只需要知道引用类的名称即可，不需要知道内部的实现变量和方法。@class还可以解决循环依赖的问题，A.h导入了B.h，而B.h导入了A.h，每一个头文件的编译都要让对象先编译成功才行。
 
 ---

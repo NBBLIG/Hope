@@ -161,3 +161,95 @@ func predecessor(root : TreeNode?, value : Int) -> TreeNode? {
         }
     }
 ```
+##插入节点
+``` swift
+guard let _ = root else {
+            let node = TreeNode(key)
+            root = node
+            return
+        }
+        
+        var pParentNode : TreeNode? = nil
+        
+        var currentNode = root
+        
+        while let tempNode = currentNode  {
+            pParentNode = currentNode
+            if tempNode.value > key {
+                currentNode = tempNode.leftNode
+            }
+            else {
+                currentNode = tempNode.rightNode
+            }
+        }
+        
+        let node = TreeNode(key)
+        if pParentNode!.value > key {
+            pParentNode!.leftNode = node
+        }
+        else {
+            pParentNode!.rightNode = node
+        }
+        node.parentNode = pParentNode
+```
+##删除节点
+``` swift
+func delete(root : inout TreeNode?, key : Int) {
+        guard let targetNode = searchNode(root: root, key: key)  else {
+            return
+        }
+        //如果只有一个节点
+        if targetNode == root!, root?.leftNode == nil, root?.rightNode == nil {
+            root = nil
+        }
+        //如果没有左子树
+        guard let _ = targetNode.leftNode else {
+            if let rightNode = targetNode.rightNode {
+                rightNode.parentNode = targetNode.parentNode
+            }
+            if targetNode.parentNode?.leftNode == targetNode {
+                targetNode.parentNode?.leftNode = targetNode.rightNode
+            }
+            else {
+                targetNode.parentNode?.rightNode = targetNode.rightNode
+            }
+            return
+        }
+        //如果没有右子树
+        guard let _ = targetNode.rightNode else {
+            if let leftNode = targetNode.leftNode {
+                leftNode.parentNode = targetNode.parentNode
+            }
+            if targetNode.parentNode?.leftNode == targetNode {
+                targetNode.parentNode?.leftNode = targetNode.leftNode
+            }
+            else {
+                targetNode.parentNode?.leftNode = targetNode.leftNode
+            }
+            return
+        }
+        //左右都存在的情况
+        let rigintMinNode = MIN(root: targetNode.rightNode)!
+        if rigintMinNode.parentNode?.leftNode == rigintMinNode {
+            rigintMinNode.parentNode?.leftNode = nil
+        }
+        else {
+            rigintMinNode.parentNode?.rightNode = nil
+        }
+        rigintMinNode.leftNode = targetNode.leftNode
+        targetNode.leftNode?.parentNode = rigintMinNode
+        
+        rigintMinNode.rightNode = targetNode.rightNode
+        targetNode.rightNode?.parentNode = rigintMinNode
+        
+        if targetNode.parentNode?.leftNode == targetNode {
+            targetNode.parentNode?.leftNode = rigintMinNode
+        }
+        else {
+            targetNode.parentNode?.rightNode = rigintMinNode
+        }
+        
+    }
+```
+## 总结
+搜索二叉树最坏的情况就是退化成线性的有序序列，因此伟大的前人发明了AVL树，下一篇开启AVL树吧

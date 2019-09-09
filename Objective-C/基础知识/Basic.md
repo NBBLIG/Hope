@@ -15,11 +15,21 @@
 
 ---
 
-### 知识点 3、Category 是什么？类扩展是什么？扩展一个类的方式用继承好还是 category 好？为什么？
-+ category 类别，特性是不用定义子类就能扩展一个类的功能，还能将不同的功能分开，不会影响其他类和原有类的关系。
-+ extention 是只在本类文件中添加 category 声明的私有方法。
-+ 注意点：扩充属性的时候，需要.h 声明，.m 用 runtime 重写 set 和 get 方法
-
+### 知识点 3、Category 
++ Category 是什么？
+    - Category 类别，特性是不用定义子类就能扩展一个类的功能，还能将不同的功能分开，不会影响其他类和原有类的关系。
++ 类扩展（Extension）是什么？
+    - 能为某个类添加成员变量,属性,方法，一般写到 .m 中。
++ 继承与 Category 的区别：
+    - 继承是用来描述类与类之间的关系的。
++ 扩展一个类的方式用继承好还是 category 好？为什么？
+    - 扩展一个类用 Category 相对好些，继承可能会破坏原有类的封装性。
++ Category 是否可以添加属性？如何通过 runtime 为 catrgory 添加属性？
+    - 可以声明 @property 但是不会自动生成 setter/getter 方法，也不会生成以及实现成员变量。因为结构体中只有方法列表，没有属性列表，不可以直接添加属性，但是可以通过 runtime 进行属性的添加。
++ 如果分类中有和原类重名的方法，调用顺序如何？
+    - 同名方法调用优先级：`分类>本类>父类`
+    - 多个分类拥有重名方法，方法调用优先级：`后编译>先编译>本类>父类`
+    
 ---
 
 ### 知识点 4、`@protected、@private、@public` 声明有什么含义？
@@ -62,9 +72,34 @@
 @property = ivar + getter + setter
 ```
 
----
-## 知识点 8、oc各种锁
-![avatar](./lock-compare.png)
 
+---
+
+### 知识点 8、oc各种锁
+![avatar](./lock-compare.png)
 + [链接](https://www.jianshu.com/p/d69495dac8cb)详细描述了自旋锁和互斥锁，以及优缺点
 + pthread_mutex(recursive)、NSRecursiveLock、@synchronized都是递归锁。 [链接](https://www.jianshu.com/p/777c28eface5)
+
+
+---
+
+### 知识点 9、OC 消息转发机制
+
+---
+
+### 知识点 10、method swizzling
+
+---
+
+### 知识点 11、GCD
+
+---
+
+
+### 知识点 12、AutoLayout
+
+---
+
+
+
+

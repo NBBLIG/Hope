@@ -29,7 +29,8 @@
 + 如果分类中有和原类重名的方法，调用顺序如何？
     - 同名方法调用优先级：`分类>本类>父类`
     - 多个分类拥有重名方法，方法调用优先级：`后编译>先编译>本类>父类`
-    
++ [深入了解 Category](https://tech.meituan.com/2015/03/03/diveintocategory.html)
+
 ---
 
 ### 知识点 4、`@protected、@private、@public` 声明有什么含义？

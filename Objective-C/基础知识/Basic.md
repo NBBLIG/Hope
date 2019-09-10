@@ -85,26 +85,111 @@
 + [链接](https://www.jianshu.com/p/d69495dac8cb)详细描述了自旋锁和互斥锁，以及优缺点
 + pthread_mutex(recursive)、NSRecursiveLock、@synchronized都是递归锁。 [链接](https://www.jianshu.com/p/777c28eface5)
 
+---
+
+## 知识点9、响应链原理
+原理图如下所示
+![avatar](./响应链原理图.png)
+
++  当用户触摸屏幕时，触碰屏幕产生事件UIEvent并存入UIApplication中的事件队列中, 并且在整个视图结构中自上而下的进行分发
++  - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event;判断当前点击事件是否存在最优响应者(First Responder）
++  - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event;判断当前点击是否在控件的Bounds之内
+
+### 思考
+![avatar](./响应事件例子图.png)
+如下代码
+
+``` objc
+viewController.m
+// 在当前VC里面添加一个tap手势，然后添加一个subview：A，最后添加一个button：B
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTap:)];
+    //下面一行注释掉
+    //tapGesture.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGesture];
+    
+    CustomView *A = [[CustomView alloc]initWithFrame:CGRectMake(100, 100, 200, 300)];
+    [self.view addSubview:A];
+    
+    UIButton *B = [UIButton buttonWithType:UIButtonTypeSystem];
+    [B setBackgroundColor:[UIColor blueColor]];
+    [B setTitle:@"按钮" forState:UIControlStateNormal];
+    [B setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+    B.frame = CGRectMake(100, 450, 200, 100);
+    [self.view addSubview:B];
+    [B addTarget:self action:@selector(onBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+```
+``` objc
+viewController.m event事件处理
+- (void)onTap:(UIGestureRecognizer *)gesture {
+    NSLog(@"%s",__func__);
+}
+
+- (void)onBtnClick:(id)sender {
+   NSLog(@"%s",__func__);
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSLog(@"%s",__func__);
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSLog(@"%s",__func__);
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSLog(@"%s",__func__);
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSLog(@"%s",__func__);
+}
+```
+``` objc
+CutomView.m 在字view A 实现
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    NSLog(@"%@:%s",NSStringFromClass([self class]),__func__);
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSLog(@"%@:%s",NSStringFromClass([self class]),__func__);
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSLog(@"%@:%s",NSStringFromClass([self class]),__func__);
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    NSLog(@"%@:%s",NSStringFromClass([self class]),__func__);
+}
+```
+问题1：点击1（点击viewcontroller的view）会输出什么结果？</br>
+问题2：点击2（点击子View A）会输出什么结果？</br>
+问题3：点击3（点击按钮）会输出什么结果？</br>
+答案：
+![avator](./响应链题目答案.png)
+问题4：如果代码中那行注释放开，上面三题的结果如何呢？
+</br>
+详细解释[链接](https://blog.gocy.tech/2016/11/19/iOS-touch-handling/)
+###总结
+通过上面了解可以明白两个事情：
+1、主view增加tap手势，在主view上添加tableview话，点击tableviewcell，不会想要select的代理方法，而是响应手势原因？
+2、怎么解决该冲突？3、如果在一个button上添加一个tap手势，点击button话，谁会响应？怎么做到两种都相应呢？
+
+### 知识点 10、OC 消息转发机制
 
 ---
 
-### 知识点 9、OC 消息转发机制
+### 知识点 11、method swizzling
 
 ---
 
-### 知识点 10、method swizzling
-
----
-
-### 知识点 11、GCD
+### 知识点 12、GCD
 
 ---
 
 
-### 知识点 12、AutoLayout
+### 知识点 13、AutoLayout
 
 ---
-
-
-
-

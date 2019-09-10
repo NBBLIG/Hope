@@ -31,6 +31,7 @@
 + 如果分类中有和原类重名的方法，调用顺序如何？
     - 同名方法调用优先级：`分类>本类>父类`
     - 多个分类拥有重名方法，方法调用优先级：`后编译>先编译>本类>父类`
++ Category 中 load 执行顺序：`本类>先编译分类>后编译分类` 
 + [深入了解 Category](https://tech.meituan.com/2015/03/03/diveintocategory.html)
 
 ---
@@ -43,6 +44,7 @@
 ---
 
 ### 知识点 5、id 与 instancetype 区别
++ 为什么系统默认初始化（init）方法模板返回的类型是 instancetype 而不是 id？
 ```objective-c
 @implementation Teacher
 //id 运行时检查，id 可作为方法参数

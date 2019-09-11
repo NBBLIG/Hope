@@ -207,7 +207,10 @@ func delete(root : inout TreeNode?, key : Int) {
             if let rightNode = targetNode.rightNode {
                 rightNode.parentNode = targetNode.parentNode
             }
-            if targetNode.parentNode?.leftNode == targetNode {
+            if targetNode == root! {
+               root = targetNode.rightNode
+            }
+            else if targetNode.parentNode?.leftNode == targetNode  {
                 targetNode.parentNode?.leftNode = targetNode.rightNode
             }
             else {
@@ -220,11 +223,14 @@ func delete(root : inout TreeNode?, key : Int) {
             if let leftNode = targetNode.leftNode {
                 leftNode.parentNode = targetNode.parentNode
             }
-            if targetNode.parentNode?.leftNode == targetNode {
+            if targetNode == root!{
+               root = targetNode.leftNode
+            }
+            else if targetNode.parentNode?.leftNode == targetNode {
                 targetNode.parentNode?.leftNode = targetNode.leftNode
             }
             else {
-                targetNode.parentNode?.leftNode = targetNode.leftNode
+                targetNode.parentNode?.rightNode = targetNode.leftNode
             }
             return
         }
@@ -242,7 +248,10 @@ func delete(root : inout TreeNode?, key : Int) {
         rigintMinNode.rightNode = targetNode.rightNode
         targetNode.rightNode?.parentNode = rigintMinNode
         
-        if targetNode.parentNode?.leftNode == targetNode {
+       if targetNode == root! {
+            root = rigintMinNode
+        }
+        else if targetNode.parentNode?.leftNode == targetNode {
             targetNode.parentNode?.leftNode = rigintMinNode
         }
         else {

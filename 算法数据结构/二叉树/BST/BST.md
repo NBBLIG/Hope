@@ -236,19 +236,25 @@ func delete(root : inout TreeNode?, key : Int) {
         }
         //左右都存在的情况
         let rigintMinNode = MIN(root: targetNode.rightNode)!
-        if rigintMinNode.parentNode?.leftNode == rigintMinNode {
-            rigintMinNode.parentNode?.leftNode = nil
+        //判断右子树最小节点跟删除节点是否存在父子关系，
+        if targetNode.rightNode! != rigintMinNode {
+            //用右子树的最小节点的右孩子（右子树的最小节点肯定没有左孩子）替换该节点
+            if rigintMinNode.parentNode?.leftNode == rigintMinNode {
+                rigintMinNode.parentNode?.leftNode = rigintMinNode.rightNode
+            }
+            else {
+                rigintMinNode.parentNode?.rightNode = rigintMinNode.rightNode
+            }
+            //把删除节点的右孩子赋值给右子树的最小节点
+            rigintMinNode.rightNode = targetNode.rightNode
+            targetNode.rightNode?.parentNode = rigintMinNode
         }
-        else {
-            rigintMinNode.parentNode?.rightNode = nil
-        }
+        //把删除节点的左孩子赋值给右子树的最小节点
         rigintMinNode.leftNode = targetNode.leftNode
         targetNode.leftNode?.parentNode = rigintMinNode
         
-        rigintMinNode.rightNode = targetNode.rightNode
-        targetNode.rightNode?.parentNode = rigintMinNode
-        
-       if targetNode == root! {
+        //下面是用右子树的最小节点替换根节点的过程
+        if targetNode == root! {
             root = rigintMinNode
         }
         else if targetNode.parentNode?.leftNode == targetNode {
@@ -257,6 +263,9 @@ func delete(root : inout TreeNode?, key : Int) {
         else {
             targetNode.parentNode?.rightNode = rigintMinNode
         }
+        
+    }
+    
         
     }
 ```

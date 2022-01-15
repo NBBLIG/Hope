@@ -33,6 +33,6 @@
     "gitbook-cli": "^2.3.2",
     "node-fetch": "^2.6.0",
     "open-cli": "^5.0.0",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.5"
   }
 }
